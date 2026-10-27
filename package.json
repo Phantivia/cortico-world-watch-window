@@ -1,6 +1,6 @@
 {
   "name": "cortico-world-watch-window",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "Cortico World: watch one window on the desktop as a video stream. Frames from the window arrive in the main conversation as a timed grid, and the window's edge flashes white when it is picked.",
   "author": "Phantivia",
