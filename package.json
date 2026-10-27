@@ -1,10 +1,18 @@
 {
   "name": "cortico-world-watch-window",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "Cortico World: watch one window on the desktop as a video stream. Frames from the window arrive in the main conversation as a timed grid, and the window's edge flashes white when it is picked.",
   "author": "Phantivia",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Phantivia/cortico-world-watch-window.git"
+  },
+  "homepage": "https://github.com/Phantivia/cortico-world-watch-window#readme",
+  "bugs": {
+    "url": "https://github.com/Phantivia/cortico-world-watch-window/issues"
+  },
   "keywords": [
     "cortico-world",
     "cortico",
