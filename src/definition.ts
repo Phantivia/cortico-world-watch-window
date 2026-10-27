@@ -8,7 +8,12 @@ export const WATCH_WINDOW: WorldDefinition<WatchWindowConfigSection> = {
   label: '盯盯窗口',
   defaults: () => structuredClone(WATCH_WINDOW_DEFAULTS),
   preflight: () => {
-    if (process.platform !== 'win32' && process.platform !== 'darwin') throw new Error('盯盯窗口只支持 Windows 和 macOS。');
+    if (process.platform === 'linux') {
+      if (process.env.XDG_SESSION_TYPE === 'wayland') throw new Error('盯盯窗口在 Linux 上只支持 X11 会话:Wayland 下看不到别的程序的窗口。登录时选 X11(Xorg)会话再启用。');
+      if (!process.env.DISPLAY) throw new Error('盯盯窗口在 Linux 上要连 X11 显示服务,没有找到 DISPLAY。');
+      return;
+    }
+    if (process.platform !== 'win32' && process.platform !== 'darwin') throw new Error('盯盯窗口只支持 Windows、macOS 和 Linux(X11)。');
   },
   // ctx.cfg is the live `worlds.watch-window` section: every key is read at use
   create: (ctx) => new WatchWindowWorld({ cfg: ctx.cfg, timezone: ctx.timezone }),

@@ -7,7 +7,12 @@ import type { ChildToMain, EngineRequest, MainToChild, SampleResult } from './en
 import { decodeJpeg, encodeJpeg, montage } from './engine/image.ts';
 
 type Os = typeof import('./engine/win32.ts') & { permitted?: () => boolean; requestPermission?: () => boolean };
-const os: Os = process.platform === 'darwin' ? await import('./engine/darwin.ts') as unknown as Os : await import('./engine/win32.ts');
+const os: Os = process.platform === 'darwin' ? await import('./engine/darwin.ts') as unknown as Os
+  : process.platform === 'linux' ? await import('./engine/linux.ts')
+  : await import('./engine/win32.ts');
+/** X11 cannot keep the glow out of a capture, so samples there wait until it is gone. */
+const glowInCaptures = process.platform === 'linux';
+let flashing: Promise<void> | null = null;
 
 async function handle(req: EngineRequest): Promise<unknown> {
   switch (req.op) {
@@ -18,6 +23,7 @@ async function handle(req: EngineRequest): Promise<unknown> {
     case 'foreground': return os.foreground();
     case 'info': return os.info(req.handle);
     case 'sample': {
+      if (glowInCaptures && flashing) await flashing;
       const g = await os.grab(req.handle, req.maxWidth, req.maxHeight, req.region);
       if (!g.ok) return g satisfies SampleResult;
       return { ok: true, sample: { jpeg: encodeJpeg(g.rgba, g.width, g.height, req.quality), width: g.width, height: g.height, gray: g.gray } } satisfies SampleResult;
@@ -27,7 +33,12 @@ async function handle(req: EngineRequest): Promise<unknown> {
       const m = montage(cells, req.cols, req.rows, req.cellWidth, req.cellHeight);
       return { jpeg: encodeJpeg(m.rgba, m.width, m.height, req.quality), width: m.width, height: m.height };
     }
-    case 'flash': await os.flash(req.handle); return null;
+    case 'flash': {
+      const f: Promise<void> = os.flash(req.handle).finally(() => { if (flashing === f) flashing = null; });
+      flashing = f;
+      await f;
+      return null;
+    }
   }
 }
 

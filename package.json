@@ -1,6 +1,6 @@
 {
   "name": "cortico-world-watch-window",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "type": "module",
   "description": "Cortico World: watch one window on the desktop as a video stream. Frames from the window arrive in the main conversation as a timed grid, and the window's edge flashes white when it is picked.",
   "author": "Phantivia",
@@ -22,7 +22,8 @@
   ],
   "os": [
     "win32",
-    "darwin"
+    "darwin",
+    "linux"
   ],
   "engines": {
     "node": ">=22"
@@ -46,11 +47,11 @@
     "locales": {
       "zh": {
         "displayName": "盯盯窗口",
-        "description": "把桌面上的一个窗口当成视频流给 Coo 看：窗口画面按时间拼成分镜图，定时送进主会话，由 Coo 自己决定说不说。选中窗口时窗口边缘闪一圈白光。用户在 World 页签里点选窗口,Coo 也能自己挑。支持 Windows 与 macOS。"
+        "description": "把桌面上的一个窗口当成视频流给 Coo 看：窗口画面按时间拼成分镜图，定时送进主会话，由 Coo 自己决定说不说。选中窗口时窗口边缘闪一圈白光。用户在 World 页签里点选窗口,Coo 也能自己挑。支持 Windows、macOS 与 Linux(X11)。"
       },
       "en": {
         "displayName": "Watch Window",
-        "description": "Lets Coo watch one desktop window as a video stream: frames from the window are laid out as a timed grid and delivered to the main conversation, and Coo decides whether to say anything. The window's edge flashes white when it is picked. Pick the window from the World tab, or let Coo pick one. Windows and macOS."
+        "description": "Lets Coo watch one desktop window as a video stream: frames from the window are laid out as a timed grid and delivered to the main conversation, and Coo decides whether to say anything. The window's edge flashes white when it is picked. Pick the window from the World tab, or let Coo pick one. Windows, macOS and Linux (X11)."
       }
     }
   },
