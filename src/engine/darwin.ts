@@ -188,7 +188,7 @@ function run(argv) {
     p.stroke;
   }
   for (let d = 0; d < inner; d += 1) {
-    const a = Math.pow(1 - d / inner, 2) * 0.35;
+    const a = Math.pow(1 - d / inner, 2) * 0.6;
     $.NSColor.colorWithCalibratedWhiteAlpha(1, a).setStroke;
     const p = $.NSBezierPath.bezierPathWithRoundedRectXRadiusYRadius($.NSMakeRect(pad + d, pad + d, w - 2 * d, h - 2 * d), 10, 10);
     p.setLineWidth(1.5);

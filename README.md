@@ -38,7 +38,7 @@
 
 ## 闪边
 
-选中窗口时,在窗口外围画一圈白色渐变光,两下闪烁,约 1.5 秒。这个窗口透明、鼠标穿透、置顶,并排除在截图之外(Windows 用 `WDA_EXCLUDEFROMCAPTURE`,macOS 用 `NSWindowSharingNone`),不会出现在观察帧里。`flash` 设为 false 关掉。
+选中窗口时,沿窗口边缘往里画一圈白色渐变光,两下闪烁,约 1.5 秒。这个窗口透明、鼠标穿透、置顶,并排除在截图之外(Windows 用 `WDA_EXCLUDEFROMCAPTURE`,macOS 用 `NSWindowSharingNone`),不会出现在观察帧里。`flash` 设为 false 关掉。
 
 ## 配置
 

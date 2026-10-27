@@ -105,21 +105,23 @@ export function montage(cells: readonly { rgba: Uint8Array; width: number; heigh
   return { rgba: out, width, height };
 }
 
-/** Glow reach outside the window's edge and inside it, in pixels at 1× scale. */
-export const GLOW_OUT = 26, GLOW_IN = 10;
+/** Glow reach outside the window's edge and inside it, in pixels at 1× scale; the glow lies inside the window. */
+export const GLOW_OUT = 0, GLOW_IN = 36;
 
 /**
  * Premultiplied white BGRA for a glow around an inner `w`×`h` rectangle that sits `pad` pixels in
  * from every side of the returned `(w + 2·pad)`×`(h + 2·pad)` image. Strongest on the edge, fading
- * to nothing `pad` pixels out and `inner` pixels in.
+ * to nothing `pad` pixels out and `inner` pixels in. Inside, the four edges' glows are layered over
+ * each other, so corners blend instead of meeting on a diagonal seam.
  */
 export function glowPixels(w: number, h: number, pad: number, inner: number): { bgra: Uint8Array; width: number; height: number } {
   const W = w + 2 * pad, H = h + 2 * pad;
   const bgra = new Uint8Array(W * H * 4);
   const x0 = pad, y0 = pad, x1 = pad + w, y1 = pad + h;
+  const edge = (d: number) => (d < inner ? (1 - d / inner) ** 2 : 0);
   for (let y = 0; y < H; y++) {
     const dyOut = y < y0 ? y0 - y : y >= y1 ? y - y1 + 1 : 0;
-    const dyIn = Math.min(y - y0, y1 - 1 - y);
+    const clearY = (1 - edge(y - y0)) * (1 - edge(y1 - 1 - y));
     for (let x = 0; x < W; x++) {
       const dxOut = x < x0 ? x0 - x : x >= x1 ? x - x1 + 1 : 0;
       let a = 0;
@@ -127,8 +129,7 @@ export function glowPixels(w: number, h: number, pad: number, inner: number): { 
         const d = Math.hypot(dxOut, dyOut);
         if (d < pad) a = (1 - d / pad) ** 2;
       } else {
-        const d = Math.min(x - x0, x1 - 1 - x, dyIn);
-        if (d < inner) a = 0.7 * (1 - d / inner) ** 2;
+        a = 1 - clearY * (1 - edge(x - x0)) * (1 - edge(x1 - 1 - x));
       }
       if (a <= 0) continue;
       const v = Math.round(a * 255), i = (y * W + x) * 4;
