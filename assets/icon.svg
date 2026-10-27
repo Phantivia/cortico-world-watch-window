@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2f4a"/>
+      <stop offset="1" stop-color="#171a2b"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#323a5e"/>
+      <stop offset="1" stop-color="#232842"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <clipPath id="inside">
+      <rect x="92" y="132" width="328" height="252" rx="26"/>
+    </clipPath>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+
+  <!-- the white edge glow drawn around a picked window -->
+  <rect x="92" y="132" width="328" height="252" rx="26" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="30" filter="url(#glow)"/>
+  <rect x="92" y="132" width="328" height="252" rx="26" fill="none" stroke="#ffffff" stroke-opacity="0.8" stroke-width="10" filter="url(#soft)"/>
+
+  <!-- the window -->
+  <rect x="92" y="132" width="328" height="252" rx="26" fill="url(#screen)"/>
+  <g clip-path="url(#inside)">
+    <rect x="92" y="132" width="328" height="46" fill="#3d4670"/>
+    <circle cx="124" cy="155" r="8" fill="#ff7a8a"/>
+    <circle cx="150" cy="155" r="8" fill="#ffd166"/>
+    <circle cx="176" cy="155" r="8" fill="#7be0a8"/>
+  </g>
+  <rect x="92" y="132" width="328" height="252" rx="26" fill="none" stroke="#ffffff" stroke-width="7"/>
+
+  <!-- Coo's eyes, looking in -->
+  <g>
+    <circle cx="200" cy="284" r="54" fill="#22e3ee"/>
+    <circle cx="200" cy="284" r="33" fill="#111322"/>
+    <circle cx="212" cy="272" r="10" fill="#ffffff"/>
+    <circle cx="316" cy="284" r="54" fill="#22e3ee"/>
+    <circle cx="316" cy="284" r="33" fill="#111322"/>
+    <circle cx="328" cy="272" r="10" fill="#ffffff"/>
+  </g>
+</svg>

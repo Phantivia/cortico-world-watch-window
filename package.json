@@ -1,0 +1,76 @@
+{
+  "name": "cortico-world-watch-window",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Cortico World: watch one window on the desktop as a video stream. Frames from the window arrive in the main conversation as a timed grid, and the window's edge flashes white when it is picked.",
+  "author": "Phantivia",
+  "license": "MIT",
+  "keywords": [
+    "cortico-world",
+    "cortico",
+    "screen",
+    "window",
+    "game"
+  ],
+  "os": [
+    "win32",
+    "darwin"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@11.5.0",
+  "main": "./src/index.ts",
+  "cortico": {
+    "kind": "world",
+    "api": 6,
+    "displayName": "Watch Window",
+    "icon": "assets/icon.png",
+    "describe": "describe.json",
+    "webUiClient": "dist/webui.js",
+    "tags": [
+      "game",
+      "video",
+      "high-cost",
+      "sensitive-data",
+      "experimental"
+    ],
+    "locales": {
+      "zh": {
+        "displayName": "盯盯窗口",
+        "description": "把桌面上的一个窗口当成视频流给 Coo 看：窗口画面按时间拼成分镜图，定时送进主会话，由 Coo 自己决定说不说。选中窗口时窗口边缘闪一圈白光。用户在 World 页签里点选窗口,Coo 也能自己挑。支持 Windows 与 macOS。"
+      },
+      "en": {
+        "displayName": "Watch Window",
+        "description": "Lets Coo watch one desktop window as a video stream: frames from the window are laid out as a timed grid and delivered to the main conversation, and Coo decides whether to say anything. The window's edge flashes white when it is picked. Pick the window from the World tab, or let Coo pick one. Windows and macOS."
+      }
+    }
+  },
+  "files": [
+    "src",
+    "dist",
+    "assets",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "describe.json"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "build:webui": "node scripts/build-webui.mjs",
+    "prepack": "node scripts/build-webui.mjs"
+  },
+  "dependencies": {
+    "jpeg-js": "^0.4.4",
+    "koffi": "^3.3.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "cortico": "^0.2.9",
+    "esbuild": "^0.24.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.9"
+  }
+}
