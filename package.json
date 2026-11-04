@@ -1,8 +1,8 @@
 {
   "name": "cortico-world-watch-window",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
-  "description": "Cortico World: watch one window on the desktop as a video stream. Frames from the window arrive in the main conversation as a timed grid, and the window's edge flashes white when it is picked.",
+  "description": "Cortico World: Coo watches one desktop window as a video stream, with frames delivered to the main conversation as a timed grid.",
   "author": "Phantivia",
   "license": "MIT",
   "repository": {
@@ -47,11 +47,11 @@
     "locales": {
       "zh": {
         "displayName": "盯盯窗口",
-        "description": "把桌面上的一个窗口当成视频流给 Coo 看：窗口画面按时间拼成分镜图，定时送进主会话，由 Coo 自己决定说不说。选中窗口时窗口边缘闪一圈白光。用户在 World 页签里点选窗口,Coo 也能自己挑。支持 Windows、macOS 与 Linux(X11)。"
+        "description": "把桌面上的一个窗口当成视频流给 Coo 看:窗口画面按时间拼成分镜图,定时送进主会话,说不说话由 Coo 自己定。\n\n**功能**\n- World 页签里点选要盯的窗口,或 3 秒后盯住前台窗口\n- Coo 也能自己列出窗口、按编号或标题选一个、换窗口或停下\n- 定时把这段画面拼成 1 到 9 格的分镜图,标出画面切换;画面不动就不送\n- Coo 看不清时取一张大图,或放大一块区域\n- 选中窗口时窗口边缘闪一圈白光,这圈光不进观察帧\n\n**平台与权限**\n- Windows:装好就能用\n- macOS:要在「系统设置 → 隐私与安全性 → 录屏与系统录音」里允许运行 Cortico 的应用,再重启它\n- Linux:只支持 X11(Xorg)会话,Wayland 下看不到别的程序的窗口\n\n主模型要能看图。每张观察帧都让 Coo 跑一轮,窗口画面会发给你配置的模型服务。详见 [README](https://github.com/Phantivia/cortico-world-watch-window#中文)。"
       },
       "en": {
         "displayName": "Watch Window",
-        "description": "Lets Coo watch one desktop window as a video stream: frames from the window are laid out as a timed grid and delivered to the main conversation, and Coo decides whether to say anything. The window's edge flashes white when it is picked. Pick the window from the World tab, or let Coo pick one. Windows, macOS and Linux (X11)."
+        "description": "Lets Coo watch one desktop window as a video stream: its frames are laid out as a timed grid and sent to the main conversation at intervals, and Coo decides whether to say anything.\n\n**Features**\n- Pick the window in the World tab, or watch the front window after 3 seconds\n- Coo can list windows itself, pick one by number or title, switch or stop\n- A grid of 1 to 9 frames at intervals with cuts noted; nothing is sent while the picture is still\n- A large image of the window, or a zoomed region, when Coo needs a closer look\n- The window's edge flashes white when picked; the glow stays out of the observations\n\n**Platforms and permissions**\n- Windows: works right after install\n- macOS: allow the app that runs Cortico under System Settings → Privacy & Security → Screen & System Audio Recording, then restart it\n- Linux: X11 (Xorg) sessions only; a Wayland session cannot see other applications' windows\n\nThe main model must accept images. Every observation runs a model round and sends the window's picture to your configured model endpoint. See the [README](https://github.com/Phantivia/cortico-world-watch-window#english)."
       }
     }
   },
